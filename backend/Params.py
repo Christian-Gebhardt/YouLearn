@@ -2,8 +2,10 @@
 Static constants for the project
 """
 
+import os
+
 # Youtube
-YT_API_KEY='' # Get from env?
+YT_API_KEY=os.environ.get("YT_API_KEY")
 YT_REGION='DE'
 
 # Database
