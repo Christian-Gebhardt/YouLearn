@@ -9,28 +9,50 @@ import json
 
 app = Flask(__name__)
 
-# Endpoint to get recommendations
-# input: userID, videoUrl; output: list of urls to be recommended
-@app.route("/api/getRecommendations", methods=['POST'])
-def get_recommendations():
+@app.route("/api/filterDistractfulVideos", methods=["POST"])
+def filter_videos():
+    """
+    Endpoint to filter distractful videos
+    input:  list of ids of recommended videos
+    output: list of ids of distractful videos
+    """
+
     data = request.get_json()
-    user_id = data['user_id']
-    video_url = data['video_url']
+    recommended_videos_ids_list = data['recommended_ids']
 
-    u = Orchestrator.getRecommendations(user_id, video_url)
-    return jsonify(u) if u else make_response(jsonify(u), 404)
+    u = Orchestrator.filter_distractful(recommended_videos_ids_list)
+    return u if u else make_response(jsonify(u), 500)
+    
 
-# Endpoint to pass feedback for the recommended video
-# input: userID, videoUrl, feedback (as string?); output: confirmation?
+# TODO
 @app.route("/api/feedback", methods=["POST"])
 def feedback():
-    data = request.get_json()
-    user_id = data['user_id']
-    video_url = data['video_url']
-    feedback = data['feedback']
+    """
+    Endpoint to post feedback
+    input: video_id, helpful boolean
+    output: confirmation?
+    """
+    return None
     
-    u = Orchestrator.feedback(user_id,video_url, feedback)
-    return jsonify(u) if u else make_response(jsonify(u), 404)
+    data = request.get_json()
+    video_id = data['video_id']
+    feedback = data['distractful'] # boolean helpful: true or false
+    
+    u = Orchestrator.feedback(video_id, feedback)
+    return jsonify(u) if u else make_response(jsonify(u), 500)
+
+
+# TODO
+@app.route("/api/get_recommendations", methods=["POST"])
+def get_recommendations():
+    """
+    Endpoint to return ids of videos to be recommended
+    """
+    return None
+
+    data = request.get_json()
+    u = Orchestrator.get_recommendations(userId, video_url)
+    return jsonify(u) if u else make_response(jsonify(u), 500)
 
 if __name__ == "__main__":
     app.run(debug=True)  # run the Flask app

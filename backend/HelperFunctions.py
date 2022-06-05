@@ -6,20 +6,7 @@ import Params
 import ast
 from apiclient.discovery import build
 from urllib import parse
-
-client = build('youtube', 'v3', developerKey=Params.YT_API_KEY)
-
-def extract_features(video_url):
-    video_id = get_video_id_from_url(video_url)
-    data = client.videos().list(id=video_id, part="snippet").execute()
-   
-    snippet = data['items'][0]['snippet'] 
-    title = snippet['title']
-    description = snippet['description']
-    tags = snippet['tags']
-    category = get_category_name_from_id(snippet['categoryId'])
-
-    return title, description, tags, category
+import string
 
 def get_video_id_from_url(video_url):
     url_parsed = parse.urlparse(video_url)
@@ -34,7 +21,6 @@ def get_category_name_from_id(video_category_id):
     for category in categories: 
         if category['id'] == video_category_id: return category['snippet']['title']
 
-title, description,tags, categories = extract_features("https://www.youtube.com/watch?v=Oq-frA8uYeU")
-
-for x in (title, description, tags, categories,):
-    print(x, "\n")
+def remove_punctuation(text):
+    # Clean text from punctuation
+    return "".join([c.lower() for c in text if c not in string.punctuation])
