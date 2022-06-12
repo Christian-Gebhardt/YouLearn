@@ -3,7 +3,6 @@ Generic helper functions for the project
 """
 
 import Params
-import ast
 from apiclient.discovery import build
 from urllib import parse
 import string

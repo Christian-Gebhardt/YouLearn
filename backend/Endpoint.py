@@ -2,12 +2,15 @@
 Service API endpoints
 """
 
-from flask.wrappers import Response
 from flask import Flask, request, jsonify, make_response
 import Orchestrator
-import json
 
 app = Flask(__name__)
+
+@app.route('/', methods=['GET'])
+def home():
+    # Ping endpoint
+    return make_response(jsonify("YouLearn server is up!"), 200)
 
 @app.route("/api/filterDistractfulVideos", methods=["POST"])
 def filter_videos():
