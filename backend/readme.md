@@ -8,24 +8,40 @@
 
 ### 1. Filter distractful videos
 
-endpoint uri: `/api/filterDistractfulVideos`
+Endpoint uri: `/api/filterDistractfulVideos`
 
-input:  list of ids of recommended videos
+Input:  list of ids of recommended videos
 
-output: list of ids of distractful videos
+Output: list of ids of distractful videos
 
-sample json request:
+Sample json request:
 
 `{ "recommended_ids" : ["YBN4xI3Z-lc", "gx8_iBO6Sig", "K-MFoZNtt2s", "OmaFy0NKTss"] }`
 
-sample json response:
+Sample json response:
 
 `{ "distractful_ids" : ["gx8_iBO6Sig", "K-MFoZNtt2s"] }`
 
-### 2. Feedback
+### 2. Filter and sort recommended videos
+
+Endpoint uri: `/api/filterAndSortDistractfulVideos`
+
+Input:  list of ids of recommended videos
+
+Output: list of ids of sorted recommended videos
+
+Sample json request:
+
+`{ "recommended_ids" : ["YBN4xI3Z-lc", "gx8_iBO6Sig", "K-MFoZNtt2s", "OmaFy0NKTss"] }`
+
+Sample json response:
+
+`{ "recommended_and_sorted_ids" : ["XiVAIdxUsZE"] }`
+
+### 3. Feedback
 
 todo
 
-### 3. Get recommendations
+### 4. Get recommendations
 
 todo
