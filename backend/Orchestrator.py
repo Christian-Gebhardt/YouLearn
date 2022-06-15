@@ -20,6 +20,21 @@ def filter_distractful(recommended_videos_ids):
   
     return distractful_ids
 
+def filter_and_sort_distractful(recommended_videos_ids):
+    # Method called by endpoint to filter distractful videos
+
+    # 1. Get metadata of the videos from youtube API
+    metadata = DataLayer.get_metadata(recommended_videos_ids)
+ 
+    # 2. Create df with video_id and value to predict from the metadata
+    df_to_predict = DataLayer.get_df_to_predict(metadata['items'])
+
+    # 3. Call to ml layer to get the sorted ids of recommended videos
+    model = DataLayer.get_trained_model()
+    distractful_ids = MlLayer.ml_filter_and_sort_distractful(model, df_to_predict)
+  
+    return distractful_ids
+
 def feedback(video_id, feedback):
     # TODO
     if feedback:

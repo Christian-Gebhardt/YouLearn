@@ -12,10 +12,29 @@ import pandas as pd
 #with open('outfile', 'wb') as fp:
 #    pickle.dump(data['items'], fp)
 
+def testGetDistractful(metadata):
+   
+    # 2. Create df with video_id and value to predict from the metadata
+    df_to_predict = DataLayer.get_df_to_predict(metadata)
+
+    # 3. Call to ml layer to get the ids of the distractful videos
+    model = DataLayer.get_trained_model()
+    distractful_ids = MlLayer.ml_filter_distractful(model, df_to_predict)
+
+    print(distractful_ids)
+
+def testSort(metadata):
+   
+     # 2. Create df with video_id and value to predict from the metadata
+    df_to_predict = DataLayer.get_df_to_predict(metadata)
+
+    # 3. Call to ml layer to get the ids of the distractful videos
+    model = DataLayer.get_trained_model()
+    distractful_ids = MlLayer.ml_filter_and_sort_distractful(model, df_to_predict)
+
+    print(distractful_ids)
+
 with open (os.environ.get("BACKEND_PATH")+'/testing/outfile', 'rb') as fp:
     metadata = pickle.load(fp)
 
-df_to_predict = DataLayer.get_df_to_predict(metadata)
-distractful_ids = MlLayer.ml_filter_distractful(df_to_predict)
-
-print(distractful_ids)
+testSort(metadata)

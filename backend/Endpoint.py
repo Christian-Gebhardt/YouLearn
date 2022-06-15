@@ -26,6 +26,19 @@ def filter_videos():
     u = Orchestrator.filter_distractful(recommended_videos_ids_list)
     return u if u else make_response(jsonify(u), 500)
     
+@app.route("/api/filterAndSortDistractfulVideos", methods=["POST"])
+def filter_and_sort_videos():
+    """
+    Endpoint to filter and sort distractful videos
+    input:  list of ids of recommended videos
+    output: list of ids of sorted recommended videos
+    """
+
+    data = request.get_json()
+    recommended_videos_ids_list = data['recommended_ids']
+
+    u = Orchestrator.filter_and_sort_distractful(recommended_videos_ids_list)
+    return u if u else make_response(jsonify(u), 500)
 
 # TODO
 @app.route("/api/feedback", methods=["POST"])
