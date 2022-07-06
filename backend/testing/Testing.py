@@ -2,10 +2,12 @@ import sys
 import os
 sys.path.append(os.environ.get("BACKEND_PATH"))
 
+import Params
 import DataLayer
 import pickle
 import MlLayer
 import pandas as pd
+from pymongo import MongoClient
 
 #f = open('./test_data.json')
 #test_json = json.load(f)
@@ -37,4 +39,12 @@ def testSort(metadata):
 with open (os.environ.get("BACKEND_PATH")+'/testing/outfile', 'rb') as fp:
     metadata = pickle.load(fp)
 
-testSort(metadata)
+uri = os.getenv('MONGO_URI')
+
+mongo_client = MongoClient(uri)
+
+db = mongo_client['youtube-db']
+train_col = db['training_col']
+test_col = db['test_col']
+data = pd.DataFrame(list(train_col.find().limit(Params.DB_LIMIT)))
+print(data)

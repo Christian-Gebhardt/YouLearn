@@ -1,0 +1,103 @@
+absl-py @ file:///opt/conda/conda-bld/absl-py_1639803114343/work
+aiohttp @ file:///tmp/build/80754af9/aiohttp_1646806365504/work
+aiosignal @ file:///tmp/build/80754af9/aiosignal_1637843061372/work
+astor==0.8.1
+asttokens @ file:///opt/conda/conda-bld/asttokens_1646925590279/work
+astunparse==1.6.3
+async-timeout @ file:///tmp/build/80754af9/async-timeout_1637851218186/work
+attrs @ file:///opt/conda/conda-bld/attrs_1642510447205/work
+backcall @ file:///home/ktietz/src/ci/backcall_1611930011877/work
+blinker==1.4
+Bottleneck @ file:///tmp/build/80754af9/bottleneck_1648028898966/work
+brotlipy==0.7.0
+cachetools==5.1.0
+certifi==2022.5.18.1
+cffi @ file:///opt/conda/conda-bld/cffi_1642701102775/work
+charset-normalizer==2.0.12
+click @ file:///tmp/build/80754af9/click_1646056590078/work
+cryptography @ file:///tmp/build/80754af9/cryptography_1633520369886/work
+debugpy @ file:///tmp/build/80754af9/debugpy_1637091799509/work
+decorator @ file:///opt/conda/conda-bld/decorator_1643638310831/work
+entrypoints @ file:///tmp/build/80754af9/entrypoints_1649926439650/work
+executing @ file:///opt/conda/conda-bld/executing_1646925071911/work
+Flask @ file:///opt/conda/conda-bld/flask_1648041541647/work
+flatbuffers @ file:///home/ktietz/cip/python-flatbuffers_1634039120618/work
+frozenlist @ file:///tmp/build/80754af9/frozenlist_1637767113340/work
+gast @ file:///Users/ktietz/demo/mc3/conda-bld/gast_1628588903283/work
+google-api-core==2.8.0
+google-api-python-client==2.48.0
+google-auth==2.6.6
+google-auth-httplib2==0.1.0
+google-auth-oauthlib @ file:///tmp/build/80754af9/google-auth-oauthlib_1617120569401/work
+google-pasta @ file:///Users/ktietz/demo/mc3/conda-bld/google-pasta_1630577991354/work
+googleapis-common-protos==1.56.1
+grpcio @ file:///tmp/build/80754af9/grpcio_1637590821884/work
+h5py @ file:///tmp/build/80754af9/h5py_1608649014695/work
+httplib2==0.20.4
+idna @ file:///tmp/build/80754af9/idna_1637925883363/work
+importlib-metadata @ file:///tmp/build/80754af9/importlib-metadata_1648544546694/work
+ipykernel @ file:///tmp/build/80754af9/ipykernel_1647000773790/work/dist/ipykernel-6.9.1-py3-none-any.whl
+ipython @ file:///opt/conda/conda-bld/ipython_1651600145335/work
+itsdangerous @ file:///tmp/build/80754af9/itsdangerous_1621432558163/work
+jedi @ file:///tmp/build/80754af9/jedi_1644297102865/work
+Jinja2 @ file:///opt/conda/conda-bld/jinja2_1647436528585/work
+joblib @ file:///tmp/build/80754af9/joblib_1635411271373/work
+jupyter-client @ file:///opt/conda/conda-bld/jupyter_client_1650622202839/work
+jupyter-core @ file:///opt/conda/conda-bld/jupyter_core_1651671229925/work
+Keras-Preprocessing @ file:///tmp/build/80754af9/keras-preprocessing_1612283640596/work
+Markdown @ file:///tmp/build/80754af9/markdown_1614363852612/work
+MarkupSafe @ file:///opt/conda/conda-bld/markupsafe_1654597864307/work
+matplotlib-inline @ file:///tmp/build/80754af9/matplotlib-inline_1628242447089/work
+mkl-fft==1.3.1
+mkl-random @ file:///tmp/build/80754af9/mkl_random_1626186066731/work
+mkl-service==2.4.0
+multidict @ file:///opt/conda/conda-bld/multidict_1640703752579/work
+nest-asyncio @ file:///tmp/build/80754af9/nest-asyncio_1649847906199/work
+numexpr @ file:///tmp/build/80754af9/numexpr_1640689833592/work
+numpy @ file:///opt/conda/conda-bld/numpy_and_numpy_base_1652801679809/work
+oauthlib @ file:///opt/conda/conda-bld/oauthlib_1644332107998/work
+opt-einsum @ file:///tmp/build/80754af9/opt_einsum_1621500238896/work
+packaging @ file:///tmp/build/80754af9/packaging_1637314298585/work
+pandas==1.4.2
+parso @ file:///opt/conda/conda-bld/parso_1641458642106/work
+pexpect @ file:///tmp/build/80754af9/pexpect_1605563209008/work
+pickleshare @ file:///tmp/build/80754af9/pickleshare_1606932040724/work
+prompt-toolkit @ file:///tmp/build/80754af9/prompt-toolkit_1633440160888/work
+protobuf==3.20.1
+ptyprocess @ file:///tmp/build/80754af9/ptyprocess_1609355006118/work/dist/ptyprocess-0.7.0-py2.py3-none-any.whl
+pure-eval @ file:///opt/conda/conda-bld/pure_eval_1646925070566/work
+pyasn1 @ file:///Users/ktietz/demo/mc3/conda-bld/pyasn1_1629708007385/work
+pyasn1-modules==0.2.8
+pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
+Pygments @ file:///opt/conda/conda-bld/pygments_1644249106324/work
+PyJWT @ file:///tmp/build/80754af9/pyjwt_1619682484438/work
+pymongo==3.12.0
+pyOpenSSL @ file:///tmp/build/80754af9/pyopenssl_1635333100036/work
+pyparsing @ file:///tmp/build/80754af9/pyparsing_1635766073266/work
+PySocks @ file:///tmp/build/80754af9/pysocks_1605305812635/work
+python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
+pytz @ file:///opt/conda/conda-bld/pytz_1654762638606/work
+pyzmq @ file:///tmp/build/80754af9/pyzmq_1638434985866/work
+requests @ file:///opt/conda/conda-bld/requests_1641824580448/work
+requests-oauthlib==1.3.0
+rsa==4.8
+scikit-learn @ file:///tmp/build/80754af9/scikit-learn_1642617106979/work
+scipy @ file:///tmp/build/80754af9/scipy_1641555004408/work
+six @ file:///tmp/build/80754af9/six_1644875935023/work
+stack-data @ file:///opt/conda/conda-bld/stack_data_1646927590127/work
+tensorboard @ file:///home/builder/ktietz/aggregate/tensorflow_recipes/ci_te/tensorboard_1614593728657/work/tmp_pip_dir
+tensorboard-plugin-wit==1.6.0
+tensorflow @ file:///home/builder/ktietz/aggregate/tensorflow_recipes/ci_cpu/tensorflow-base_1614360980945/work/tensorflow_pkg/tensorflow-2.4.1-cp39-cp39-linux_x86_64.whl
+tensorflow-estimator @ file:///home/builder/adipietro/tf/tensorflow-estimator_1630508970172/work/tensorflow_estimator-2.6.0-py2.py3-none-any.whl
+termcolor==1.1.0
+threadpoolctl @ file:///Users/ktietz/demo/mc3/conda-bld/threadpoolctl_1629802263681/work
+tornado @ file:///tmp/build/80754af9/tornado_1606942317143/work
+traitlets @ file:///tmp/build/80754af9/traitlets_1636710298902/work
+typing_extensions @ file:///opt/conda/conda-bld/typing_extensions_1647553014482/work
+uritemplate==4.1.1
+urllib3 @ file:///opt/conda/conda-bld/urllib3_1650639997961/work
+wcwidth @ file:///Users/ktietz/demo/mc3/conda-bld/wcwidth_1629357192024/work
+Werkzeug @ file:///opt/conda/conda-bld/werkzeug_1645628268370/work
+wrapt @ file:///tmp/build/80754af9/wrapt_1638433857881/work
+yarl @ file:///tmp/build/80754af9/yarl_1606939947528/work
+zipp @ file:///opt/conda/conda-bld/zipp_1652341764480/work

@@ -8,5 +8,4 @@ def get_yt_client():
 
 def get_db():
     mongo_client = MongoClient(Params.DB_SERVER)
-    db = mongo_client['youtube-db']
-    return db
+    return mongo_client['youtube-db']
