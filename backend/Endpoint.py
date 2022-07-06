@@ -68,8 +68,15 @@ def feedback():
 
     data = request.get_json()
     video_id = data['video_id']
-    feedback = data['distractful'] # boolean distractful: true or false
+    distractful = data['distractful'] # boolean distractful: true or false
     
+    # TODO
+    if (distractful):
+        response="Video "+video_id+" was stored as distractful."
+    else:
+        response="Video "+video_id+" was stored as not distractful."
+    return make_response(jsonify(response), 200)
+
     u = orchestrator.feedback(video_id, feedback)
     return jsonify(u) if u else make_response(jsonify(u), 500)
 
@@ -82,14 +89,14 @@ def get_recommendations():
     Endpoint to return ids of videos to be recommended
     """
 
-    return make_response("Feedback accepted!", 200)
+    return None
 
     data = request.get_json()
     u = orchestrator.get_recommendations(userId, video_url)
     return jsonify(u) if u else make_response(jsonify(u), 500)
 
 if __name__ == "__main__":
-    if (Params.RUNNING_IN_CLOUD is True):
-        app.run(host="0.0.0.0", port=80, debug=True)
+    if eval(Params.RUNNING_IN_CLOUD):
+        app.run(host='0.0.0.0', port=80)
     else:
         app.run(debug=True)  # run the Flask app
