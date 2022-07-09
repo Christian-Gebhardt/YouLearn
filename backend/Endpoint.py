@@ -56,7 +56,6 @@ def filter_and_sort_videos():
     u = orchestrator.filter_and_sort_distractful(filter_threshold, recommended_videos_ids_list)
     return u if u else make_response(jsonify(u), 500)
 
-# TODO
 @app.route("/api/feedback", methods=["POST"])
 @cross_origin()
 def feedback():
@@ -68,17 +67,10 @@ def feedback():
 
     data = request.get_json()
     video_id = data['video_id']
-    distractful = data['distractful'] # boolean distractful: true or false
+    is_distractful = data['distractful'] # boolean distractful: true or false
     
-    # TODO
-    if (distractful):
-        response="Video "+video_id+" was stored as distractful."
-    else:
-        response="Video "+video_id+" was stored as not distractful."
-    return make_response(jsonify(response), 200)
-
-    u = orchestrator.feedback(video_id, feedback)
-    return jsonify(u) if u else make_response(jsonify(u), 500)
+    u = orchestrator.feedback(video_id, is_distractful)
+    return jsonify("Feedback for video "+video_id+" stored.") if u else make_response(jsonify(u), 500)
 
 
 # TODO
@@ -94,6 +86,8 @@ def get_recommendations():
     data = request.get_json()
     u = orchestrator.get_recommendations(userId, video_url)
     return jsonify(u) if u else make_response(jsonify(u), 500)
+
+
 
 if __name__ == "__main__":
     if eval(Params.RUNNING_IN_CLOUD):

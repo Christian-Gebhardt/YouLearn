@@ -14,37 +14,16 @@ from pymongo import MongoClient
 #with open('outfile', 'wb') as fp:
 #    pickle.dump(data['items'], fp)
 
-def testGetDistractful(metadata):
-   
-    # 2. Create df with video_id and value to predict from the metadata
-    df_to_predict = DataLayer.get_df_to_predict(metadata)
+import DataLayer
+import MlLayer
 
-    # 3. Call to ml layer to get the ids of the distractful videos
-    model = DataLayer.get_trained_model()
-    distractful_ids = MlLayer.ml_filter_distractful(model, df_to_predict)
+class Testing():
+    def __init__(self):
+        self.ml_layer = MlLayer.MlLayer()
+        self.data_layer = DataLayer.DataLayer()
 
-    print(distractful_ids)
+    def testFeedback(self, video_id, distractful):
+        self.data_layer.store_feedback(video_id, distractful)
 
-def testSort(metadata):
-   
-     # 2. Create df with video_id and value to predict from the metadata
-    df_to_predict = DataLayer.get_df_to_predict(metadata)
-
-    # 3. Call to ml layer to get the ids of the distractful videos
-    model = DataLayer.get_trained_model()
-    distractful_ids = MlLayer.ml_filter_and_sort_distractful(model, df_to_predict)
-
-    print(distractful_ids)
-
-with open (os.environ.get("BACKEND_PATH")+'/testing/outfile', 'rb') as fp:
-    metadata = pickle.load(fp)
-
-uri = os.getenv('MONGO_URI')
-
-mongo_client = MongoClient(uri)
-
-db = mongo_client['youtube-db']
-train_col = db['training_col']
-test_col = db['test_col']
-data = pd.DataFrame(list(train_col.find().limit(Params.DB_LIMIT)))
-print(data)
+testing = Testing()
+testing.testFeedback("jWkH6K4_xEg", True)

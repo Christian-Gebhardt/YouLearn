@@ -1,8 +1,24 @@
 # YouLearn Backend Readme
 
 1. Conda dependencies in `package-list.txt`
-2. Needed environment variables: `YT_API_KEY`, `PATH_TO_TRAINED_MODEL_MLP` and `RUNNING_IN_CLOUD`
+2. Setup environment variables
 3. Run `Endpoint.py` in the environment
+
+## Environment variables
+
+`BACKEND_PATH` - for testing, `<path to git repo>/backend`
+
+`YT_API_KEY`
+
+`MONGO_URI`
+
+`PATH_TO_STATIC_MODEL` - initial model that does not change, serving as fallback if something goes wrong with the dynamic model
+
+`PATH_TO_DYNAMIC_MODEL` - model that is being dynamically trained (should be backed up by a system service eventually). **If not present, copy the static model manually** (and rename the copy to e.g. `model_dynamic.sav`).
+
+`RUNNING_IN_CLOUD` - false for localhost deployment
+
+**More static variables are in Params.py**
 
 ## Endpoints
 
@@ -50,14 +66,12 @@ Body:
 
 - Endpoint: `/api/feedback`
 
-- Sample json request:
- 
-`{ "video_id": "gx8_iBO6Sig", "distractful": true }`
+- Input: json with single `video_id` and boolean `distractful`
 
 - Output:
 
-`Success code 200`
+JSON message that the feedback was stored and `Success code 200`
 
-### 4. Get recommendations
-
-todo
+- Sample json request:
+ 
+`{ "video_id": "gx8_iBO6Sig", "distractful": true }`

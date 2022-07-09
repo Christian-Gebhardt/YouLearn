@@ -1,0 +1,11 @@
+[Unit]
+Description=YouLearn Service
+After=network.target
+
+[Service]
+WorkingDirectory=/home/youlearn/YouLearn
+ExecStart=/home/youlearn/YouLearn/.local/run.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

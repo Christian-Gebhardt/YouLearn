@@ -4,12 +4,16 @@ Orchestrator to handle calls from endpoint (so they won't go directly to data la
 
 import DataLayer
 import MlLayer
+import Params
+import threading
 
 class Orchestrator():
     def __init__(self):
         self.ml_layer = MlLayer.MlLayer()
         self.data_layer = DataLayer.DataLayer()
-
+        self.counter_until_retrain = 0
+        self.retrain_thread = None
+      
     def filter_distractful(self, recommended_videos_ids):
         # Method called by endpoint to filter distractful videos
 
@@ -38,21 +42,24 @@ class Orchestrator():
     
         return distractful_ids
 
-    def feedback(self, video_id, feedback):
+    def feedback(self, video_id, is_distractful):
 
-        # TODO Decide if feedbacks stored as ids or as kaggle dataset -> adjust mongo sample
+        # 1. Store the feedback in the db collection feedback
+        self.data_layer.store_feedback(video_id, is_distractful)
+        self.counter_until_retrain+=1
 
-        # Store the feedback in the db collection feedback
-        self.data_layer.store_feedback(feedback)
-    
-        # TODO Check the counter / scheduler
-        train = False
+        # 2. Check the counter if retraining is needed
+        if self.counter_until_retrain >= Params.NUM_OF_FEEDBACKS_UNTIL_RETRAIN:
+            print('retraining started')
+            if self.retrain_thread is not None and self.retrain_thread.is_alive():
+                print('Retraining already in progress!')
+            else:
+                self.retrain_thread = threading.Thread(target=self.ml_layer.ml_retrain, name="retrainer", args=[self.data_layer])
+                self.retrain_thread.start()
+                self.counter_until_retrain = 0
 
-        if train:
-            self.ml_layer.ml_retrain(self.data_layer)
-        
         return True
-        
+
     def get_recommendations(userId, video_url):
         # TODO
         return None

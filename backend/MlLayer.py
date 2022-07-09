@@ -36,11 +36,15 @@ class MlLayer:
         return json.dumps({'recommended_and_sorted_ids' : df['video_id'].to_list()})
 
     def ml_retrain(self, data_layer):
-        num_from_kaggle = Params.NUM_OF_TRAINING_SAMPLES - len(data_layer.dataset_kaggle)
-        random_train = data_layer.dataset_kaggle.sample(n=num_from_kaggle)
+        # Method that retrains the model and calls datalayer to store it
 
-        df = pd.concat(random_train, data_layer.dataset_feedbacks)
-
+        if len(data_layer.dataset_feedbacks) < Params.NUM_OF_TRAINING_SAMPLES:
+            num_from_kaggle = Params.NUM_OF_TRAINING_SAMPLES - len(data_layer.dataset_feedbacks)
+            random_train = data_layer.dataset_kaggle.sample(n=num_from_kaggle)
+            df = pd.concat([random_train, data_layer.dataset_feedbacks])
+        else:
+            df = data_layer.dataset_feedbacks.sample(n=Params.NUM_OF_TRAINING_SAMPLES)
+    
         x_train = df['title'] + " " + df['description']
         y_train = df['category_id']
 
