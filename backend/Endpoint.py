@@ -91,6 +91,6 @@ def get_recommendations():
 
 if __name__ == "__main__":
     if eval(Params.RUNNING_IN_CLOUD):
-        app.run(host='0.0.0.0', port=80)
+        app.run(host='0.0.0.0', port=80, debug=True)
     else:
         app.run(debug=True)  # run the Flask app
