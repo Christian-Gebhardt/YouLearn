@@ -50,7 +50,7 @@ class Orchestrator():
 
         # 2. Check the counter if retraining is needed
         if self.counter_until_retrain >= Params.NUM_OF_FEEDBACKS_UNTIL_RETRAIN:
-            print('retraining started')
+            print('Retraining started.')
             if self.retrain_thread is not None and self.retrain_thread.is_alive():
                 print('Retraining already in progress!')
             else:
@@ -59,7 +59,3 @@ class Orchestrator():
                 self.counter_until_retrain = 0
 
         return True
-
-    def get_recommendations(userId, video_url):
-        # TODO
-        return None

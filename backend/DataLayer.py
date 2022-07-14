@@ -73,4 +73,4 @@ class DataLayer():
     def store_model(self, model):
         filehandler = open(Params.PATH_TO_DYNAMIC_MODEL, 'wb') 
         pickle.dump(model, filehandler)
-        print('retraining finished')    
+        print('Retraining finished')    

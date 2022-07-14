@@ -2,6 +2,7 @@
 Service API endpoints
 """
 
+from queue import Empty
 from flask import Flask, request, jsonify, make_response
 import Orchestrator
 import Params
@@ -29,6 +30,9 @@ def filter_videos():
     """
 
     data = request.get_json()
+    if (not check_request(data, ['recommended_ids'])):
+        return make_response(jsonify("Wrong request!"), 400)
+
     recommended_videos_ids_list = data['recommended_ids']
 
     u = orchestrator.filter_distractful(recommended_videos_ids_list)
@@ -42,16 +46,18 @@ def filter_and_sort_videos():
     input:  list of ids of recommended videos
     output: list of ids of sorted recommended videos
     """
+    
+    data = request.get_json()
+    if (not check_request(data, ['recommended_ids',])):
+        return make_response(jsonify("Wrong request!"), 400)
 
-    filter_threshold = request.args.get("filter_threshold")
+    recommended_videos_ids_list = data['recommended_ids']
 
+    filter_threshold = request.args.get('filter_threshold')
     if filter_threshold is None:
         filter_threshold = 0.5
     else:
         filter_threshold = float(filter_threshold)
-
-    data = request.get_json()
-    recommended_videos_ids_list = data['recommended_ids']
 
     u = orchestrator.filter_and_sort_distractful(filter_threshold, recommended_videos_ids_list)
     return u if u else make_response(jsonify(u), 500)
@@ -61,34 +67,37 @@ def filter_and_sort_videos():
 def feedback():
     """
     Endpoint to post feedback
-    input: video_id, helpful boolean
-    output: confirmation?
+    input: video_id, distractful (boolean)
+    output: confirmation, 200
     """
 
     data = request.get_json()
+    if (not check_request(data, ['video_id', 'distractful'])):
+        return make_response(jsonify("Wrong request!"), 400)
+
     video_id = data['video_id']
-    is_distractful = data['distractful'] # boolean distractful: true or false
+    is_distractful = data['distractful']
     
     u = orchestrator.feedback(video_id, is_distractful)
     return jsonify("Feedback for video "+video_id+" stored.") if u else make_response(jsonify(u), 500)
 
 
-# TODO
-@app.route("/api/get_recommendations", methods=["POST"])
-@cross_origin()
-def get_recommendations():
-    """
-    Endpoint to return ids of videos to be recommended
-    """
+def check_request(data, keys):
+    if data is None:
+        return False
 
-    return None
+    try:
+        for key in keys:
+            if data[key] is None:
+                return False
+            if isinstance(data[key], list) and (not data[key] or '' in data[key]):
+                return False
+    except Exception as e:
+        print(e)
+        return False
 
-    data = request.get_json()
-    u = orchestrator.get_recommendations(userId, video_url)
-    return jsonify(u) if u else make_response(jsonify(u), 500)
-
-
-
+    return True
+   
 if __name__ == "__main__":
     if eval(Params.RUNNING_IN_CLOUD):
         app.run(host='0.0.0.0', port=80, debug=True)
