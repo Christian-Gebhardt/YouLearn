@@ -6,6 +6,7 @@ import DataLayer
 import MlLayer
 import Params
 import threading
+import logging
 
 class Orchestrator():
     def __init__(self):
@@ -50,9 +51,9 @@ class Orchestrator():
 
         # 2. Check the counter if retraining is needed
         if self.counter_until_retrain >= Params.NUM_OF_FEEDBACKS_UNTIL_RETRAIN:
-            print('Retraining started.')
+            logging.info('Retraining started')
             if self.retrain_thread is not None and self.retrain_thread.is_alive():
-                print('Retraining already in progress!')
+                logging.info('Retraining already in progress!')
             else:
                 self.retrain_thread = threading.Thread(target=self.ml_layer.ml_retrain, name="retrainer", args=[self.data_layer])
                 self.retrain_thread.start()

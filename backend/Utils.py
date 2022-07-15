@@ -3,9 +3,9 @@ Generic helper functions for the project
 """
 
 import Params
-from apiclient.discovery import build
-from urllib import parse
+import Helpers
 import string
+from urllib import parse
 
 def get_video_id_from_url(video_url):
     url_parsed = parse.urlparse(video_url)
@@ -13,6 +13,7 @@ def get_video_id_from_url(video_url):
     return qsl['v'][0]
 
 def get_category_name_from_id(video_category_id):
+    client = Helpers.get_yt_client()
     data = client.videoCategories().list(part='snippet', regionCode=Params.YT_REGION).execute()
 
     categories = data['items']

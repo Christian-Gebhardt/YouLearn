@@ -2,17 +2,27 @@
 Service API endpoints
 """
 
-from queue import Empty
 from flask import Flask, request, jsonify, make_response
 import Orchestrator
 import Params
 from flask_cors import CORS, cross_origin
+import logging
+import sys
 
-app = Flask(__name__)
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
+logging.basicConfig(
+    level=logging.INFO, 
+    stream=sys.stdout, 
+    format='[%(asctime)s] %(levelname)s:%(name)s: %(message)s'
+)
+logging.getLogger('googleapiclient.discovery_cache').setLevel(logging.ERROR)
 
 orchestrator = Orchestrator.Orchestrator()
+
+app = Flask(__name__)
+
+# Add cors headers
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/', methods=['GET'])
 @cross_origin()
@@ -79,13 +89,12 @@ def feedback():
     is_distractful = data['distractful']
     
     u = orchestrator.feedback(video_id, is_distractful)
-    return jsonify("Feedback for video "+video_id+" stored.") if u else make_response(jsonify(u), 500)
+    return jsonify("Feedback for video {} stored.".format(video_id)) if u else make_response(jsonify(u), 500)
 
 
 def check_request(data, keys):
     if data is None:
         return False
-
     try:
         for key in keys:
             if data[key] is None:
@@ -97,7 +106,7 @@ def check_request(data, keys):
         return False
 
     return True
-   
+
 if __name__ == "__main__":
     if eval(Params.RUNNING_IN_CLOUD):
         app.run(host='0.0.0.0', port=80, debug=True)
