@@ -1,7 +1,6 @@
 import Params
 from pymongo import MongoClient
 from apiclient.discovery import build
-import logging
 
 def get_yt_client():
     return build('youtube', 'v3', developerKey=Params.YT_API_KEY) 
